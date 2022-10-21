@@ -23,3 +23,6 @@ df.drop('logos', axis = 1, inplace = True)
 
 df.columns
 df.head()
+df.tail()
+df.describe()
+
