@@ -26,3 +26,10 @@ df.head()
 df.tail()
 df.describe()
 
+#Call Records API and get SEC Records
+records_api = cfbd.GamesApi(api_config)
+sec_records = []
+
+for i in range(1950,2022):
+  sec_records.append(records_api.get_team_records(year=i, conference = 'SEC'))
+
