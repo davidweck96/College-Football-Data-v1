@@ -33,3 +33,4 @@ sec_records = []
 for i in range(1950,2022):
   sec_records.append(records_api.get_team_records(year=i, conference = 'SEC'))
 
+sec_records[0]
