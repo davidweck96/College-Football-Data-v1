@@ -37,6 +37,7 @@ for i in range(1950,2022):
   sec_record_df_temp = sec_record_df_temp[['year', 'team', 'conference', 'division', 'total']]
   sec_record_df_temp = pd.concat([sec_record_df_temp.drop('total', axis = 1), \
                                  sec_record_df_temp['total'].apply(pd.Series)], axis = 1)
+  sec_records_df = pd.concat([sec_records_df, sec_record_df_temp], axis = 0)    
 
 
 
