@@ -15,22 +15,27 @@ teams = teams_api.get_fbs_teams()
 teams[0]
 
 #Put teams into dataframe and clean up columns
-df = pd.DataFrame.from_records([t.to_dict() for t in teams])
-df = pd.concat([df.drop('location', axis = 1), df['location'].apply(pd.Series)], axis = 1)
-df['logo1'] = [df['logos'][i][0] for i in range(len(df))]
-df['logo2'] = [df['logos'][i][1] for i in range(len(df))]
-df.drop('logos', axis = 1, inplace = True)
+teams_df = pd.DataFrame.from_records([t.to_dict() for t in teams])
+teams_df = pd.concat([teams_df.drop('location', axis = 1), teams_df['location'].apply(pd.Series)], axis = 1)
+teams_df['logo1'] = [teams_df['logos'][i][0] for i in range(len(teams_df))]
+teams_df['logo2'] = [teams_df['logos'][i][1] for i in range(len(teams_df))]
+teams_df.drop('logos', axis = 1, inplace = True)
 
-df.columns
-df.head()
-df.tail()
-df.describe()
+teams_df.columns
+teams_df.head()
+teams_df.describe()
 
 #Call Records API and get SEC Records
 records_api = cfbd.GamesApi(api_config)
-sec_records = []
+sec_records_df = pd.DataFrame()
 
 for i in range(1950,2022):
-  sec_records.append(records_api.get_team_records(year=i, conference = 'SEC'))
+  record = records_api.get_team_records(year=i, conference = 'SEC')
+  sec_record_df_temp = pd.DataFrame.from_records([r.to_dict() \
+                                                  for r in record])
+  sec_record_df_temp = sec_record_df_temp[['year', 'team', 'conference', 'division', 'total']]
+  sec_record_df_temp = pd.concat([sec_record_df_temp.drop('total', axis = 1), \
+                                 sec_record_df_temp['total'].apply(pd.Series)], axis = 1)
 
-sec_records[0]
+
+
