@@ -29,6 +29,7 @@ teams_df.describe()
 records_api = cfbd.GamesApi(api_config)
 sec_records_df = pd.DataFrame()
 
+#Put records into dataframe and clean columns
 for i in range(1950,2022):
   record = records_api.get_team_records(year=i, conference = 'SEC')
   sec_record_df_temp = pd.DataFrame.from_records([r.to_dict() \
