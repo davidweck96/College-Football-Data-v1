@@ -1,6 +1,7 @@
 import cfbd
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 #Configure API
 config = cfbd.Configuration()
@@ -15,3 +16,6 @@ florida_stats_df = pd.DataFrame().from_records(([t.to_dict() for t in florida_st
 florida_stats_df = florida_stats_df.pivot(index = ['season', 'team', 'conference'] \
                      , columns = 'stat_name' \
                      , values = 'stat_value')
+    
+florida_stats_df.info()
+florida_stats_df.describe()
