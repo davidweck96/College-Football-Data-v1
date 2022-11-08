@@ -31,3 +31,29 @@ plt.xlabel('Season')
 plt.ylabel('Passing TDs')
 plt.title('Florida Gators Passing TDs by Season')
 plt.show()
+
+sns.lineplot(data = florida_stats_df \
+           , x = 'season' \
+           , y = 'rushingYards' \
+           , palette = ['#0021A5'])
+plt.xticks(ticks = np.arange(2004,2022), rotation = 45)
+plt.show()
+
+sns.scatterplot(data = florida_stats_df \
+              , x = 'passAttempts' \
+              , y = 'netPassingYards' \
+              , size = 'interceptions'
+              , palette = ['#0021A5'])
+plt.show()
+
+sns.scatterplot(data = florida_stats_df \
+              , x = 'rushingAttempts' \
+              , y = 'rushingYards' \
+              , size = 'fumblesLost'
+              , palette = ['#0021A5'])
+plt.show()
+
+sns.regplot(data = florida_stats_df \
+          , x = 'rushingYards' \
+          , y = 'netPassingYards')
+plt.show()
